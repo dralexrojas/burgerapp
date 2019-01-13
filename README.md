@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a burger app created with MySQL2, Node, Express, Handlebars and Sequelize.
+This project is a burger app created with MySQL2, Node, Express, Handlebars and Sequelize ( https://ajr-burgerapp.herokuapp.com/ ).
 
 ## Expected Outcomes
 
