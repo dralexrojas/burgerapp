@@ -31,8 +31,8 @@ app.use("/", routes);
 app.use("/update", routes);
 app.use("/create", routes);
 
-
-db.sequelize.sync({ force: true }).then(function() {
+//CHECK { FORCE: TRUE } ON OR OFF//
+db.sequelize.sync({}).then(function() {
     app.listen(PORT, function() {
       console.log("App listening on PORT " + PORT);
     });
