@@ -4,32 +4,34 @@ var router = express.Router();
 
 var db = require("../models/");
 
-router.get("/", function(req, res) {
+router.get("/", function (req, res) {
   res.redirect("/burgers");
 });
 
-router.get("/burgers", function(req, res) {
- 
-  db.Burger.findAll().then(function(dbBurger) {
-      console.log(dbBurger);
+router.get("/burgers", function (req, res) {
 
-      var hbsObject = { burger: dbBurger };
-      return res.render("index", hbsObject);
-    });
+  db.Burger.findAll().then(function (dbBurger) {
+    console.log(dbBurger);
+
+    var hbsObject = { burger: dbBurger };
+    return res.render("index", hbsObject);
+  });
 });
 
-// post route to create burgers
-router.post("/burgers/create", function(req, res) {
+// post route to create burgers with redirect if validation error
+router.post("/burgers/create", function (req, res) {
   db.Burger.create({
     burger_name: req.body.burger_name
-  }).then(function(dbBurger) {
-
+  }).then(function (dbBurger) {
+    res.redirect("/");
+  }).catch(function(err){
+    console.log(err);
     res.redirect("/");
   });
 });
 
 // put route to devour a burger
-router.put("/burgers/update", function(req, res) {
+router.put("/burgers/update", function (req, res) {
 
   db.Burger.update({
     devoured: true
@@ -39,7 +41,7 @@ router.put("/burgers/update", function(req, res) {
         id: req.body.burger_id
       }
     }
-  ).then(function(dbBurger) {
+  ).then(function (dbBurger) {
     res.redirect("/");
   });
 });
